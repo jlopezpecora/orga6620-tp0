@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
-#include "engine.h"
+#include "complex.h"
 
 #define VERSION 1.0
 #define NO_ARGS 0
@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
 				break;
 		}
 	} else {
-        run();
+        
     }
     return EXIT_SUCCESS;
 }

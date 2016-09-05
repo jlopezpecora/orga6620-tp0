@@ -5,7 +5,7 @@ DFLAGS = -Wall -g -DDEBUG=1
 SRC_DIR = ./src
 BIN_DIR = ./bin
 
-MAIN = $(SRC_DIR)/app.c $(SRC_DIR)/engine.c $(SRC_DIR)/matrix.c
+MAIN = $(SRC_DIR)/app.c $(SRC_DIR)/complex.c
 EXEC = tp0
 
 all: release
