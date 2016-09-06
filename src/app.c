@@ -35,15 +35,15 @@ int main(int argc, char** argv) {
 		}
 	} else {
 		complex_t zc;
-		zc.re = 10;
-		zc.im = 5;
+		zc.re = 0;
+		zc.im = 0;
 		complex_t c;
-		c.re = 10;
-		c.im = 2;
-		int x = 100;	
-		int y = 100;
-		double w = 1000;
-		double h = 1000;
+		c.re = 0.285;
+		c.im = -0.01;
+		int x = 640;	
+		int y = 480;
+		double w = 4;
+		double h = 4;
              	int N = 255;
         	drawJulia(x,y,w,h,zc,c,N);
    	}
