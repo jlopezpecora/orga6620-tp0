@@ -1,4 +1,5 @@
 #include "complex.h"
+#include <math.h>
 
 void complex_create(complex_t* z, double re, double im) {
     z->re = re;
@@ -13,10 +14,14 @@ void complex_add(complex_t* z, complex_t w) {
 }
 
 void complex_mult(complex_t* z, complex_t w) {
-
+    double re = z->re;
+    double im = z->im;
+    z->re = (re*w.re)-(im*w.im);
+    z->im = (re*w.im)+(im*w.re);
 }
 
-double complex_abs(complex_t* z) {
-    return 0;
+double complex_abs(complex_t* z) {  
+	
+    return sqrt((z->re*z->re)+(z->im*z->im));
 }
 

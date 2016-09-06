@@ -1,6 +1,6 @@
 
-CFLAGS = -Wall
-DFLAGS = -Wall -g -DDEBUG=1
+CFLAGS = -Wall -lm
+DFLAGS = -Wall -g -DDEBUG=1 -lm
 
 SRC_DIR = ./src
 BIN_DIR = ./bin
