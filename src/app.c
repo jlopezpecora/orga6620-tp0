@@ -81,25 +81,24 @@ static void drawJulia(int x, int y, double w, double h, complex_t zc, complex_t 
 
 	fprintf(pFile, "P2\n");
 	fprintf(pFile, "# julia.pgm\n");
-	fprintf(pFile, "%d %d\n", x, y);
-	fprintf(pFile, "%d %d\n", x, y);
+	fprintf(pFile, "%d %d\n", x, y);	
 	fprintf(pFile, "%d\n", N);
-
+	 
 	for (int j=0; j<y; ++j){
 	    for (int i =0; i<x; ++i){
-		complex_t* z = malloc(sizeof(complex_t));            
-    		complex_map(z, i, j, dw, dh, re0, im0);
+		complex_t z;           
+    		complex_map(&z, i, j, dw, dh, re0, im0);
+		
 	        int brillo = N;
 	        for (int k=0; k<N-1;++k){
-	        	if (complex_abs(z)>2){
+	        	if (complex_abs(&z)>2){
 		            brillo = k;
 		            break;
 			}
-			complex_mult(z,*z);
-			complex_add(z,c);
+			complex_mult(&z,z);
+			complex_add(&z,c);
 		}
-		fprintf(pFile,"%d ",brillo);
-		free(z);
+		fprintf(pFile,"%d ",brillo);		
 	    }
 	    fprintf(pFile,"\n");
 	}
