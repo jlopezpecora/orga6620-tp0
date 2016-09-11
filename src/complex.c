@@ -26,3 +26,9 @@ double complex_abs(complex_t* z) {
    return abs;
 }
 
+void complex_map(complex_t* z, int i, int j, double dw, double dh, double re0, double im0){
+         
+   double re = re0+dw/2+dw*i;
+   double im = im0-dh/2-dh*j;
+   complex_create(z,re,im);
+}
