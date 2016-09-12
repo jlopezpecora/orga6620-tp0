@@ -81,14 +81,14 @@ int main(int argc, char** argv) {
 				}
 				break;
 		    case 'c':
-				if (set_complex(optarg, &c) != 0) {
+				if (set_complex(optarg, &zc) != 0) {
                     print_invalid_arg(param, optarg);
                     print_help();
 				    return ERR_ARG;				    
 				}
 				break;
 		    case 'C':
-				if (set_complex(optarg, &zc) != 0) {
+				if (set_complex(optarg, &c) != 0) {
                     print_invalid_arg(param, optarg);
                     print_help();
 				    return ERR_ARG;				    
@@ -274,6 +274,7 @@ static void drawJulia(int x, int y, double w, double h, complex_t zc, complex_t 
             complex_t z;           
             complex_map(&z, i, j, dw, dh, re0, im0);
             int brillo = N;
+
             for (int k=0; k<N-1;++k) {
                 if (complex_abs(&z)>2) {
                     brillo = k;
