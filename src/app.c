@@ -266,7 +266,6 @@ static void drawJulia(int x, int y, double w, double h, complex_t zc, complex_t 
     double im0 = zc.im + h/2;
 
     fprintf(file, "P2\n");
-    fprintf(file, "# julia.pgm\n");
     fprintf(file, "%d %d\n", x, y);	
     fprintf(file, "%d\n", N);
 	 
@@ -283,9 +282,9 @@ static void drawJulia(int x, int y, double w, double h, complex_t zc, complex_t 
                 complex_mult(&z,z);
                 complex_add(&z,c);
             }
-            fprintf(pFile,"%d ",brillo);
+            fprintf(file,"%d ",brillo);
         }
-	    fprintf(pFile,"\n");
+	    fprintf(file,"\n");
 	}
 }
 
