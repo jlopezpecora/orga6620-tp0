@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-EXPECTED1="P2\n1 1\n255\n255"
 
 function run () {
   passed=0;
@@ -12,7 +11,7 @@ function run () {
 }
 
 function TestPuntoPertenece () {
-  echo "Test Punto que pertenece al Conjunto de Julia\n"
+  echo "Test Punto que pertenece al Conjunto de Julia"
   ./bin/tp0 -c 0.01+0i -r 1x1 -o - > test/actual.pgm;
   DIFF=$(diff test/actual.pgm test/expected1.pgm); 
   if [ "$DIFF" != "" ]
@@ -26,10 +25,15 @@ function TestPuntoPertenece () {
 
 function TestPuntoNoPertenece() {
   echo "Test Punto que No Pertenece al Conjunto de Julia"
-  echo -n $2  > test/input;
-  echo -n $1  > test/expected;
-  ./tp0 -i test/input     > test/actual;
-  diff test/actual test/expected;
+  ./bin/tp0 -c 10+0i -r 1x1 -o - > test/actual.pgm;
+  DIFF=$(diff test/actual.pgm test/expected2.pgm); 
+  if [ "$DIFF" != "" ]
+  then
+    echo "Test failed";
+  else
+    echo "Test passed";
+  fi
+  rm test/actual.pgm 
 }
 
 function TestImagenImposible() {
@@ -56,6 +60,6 @@ function TestArgumentosVacios() {
   diff -a  <(echo -n $1 | ./tp0 -d) <(echo -n $1| base64 -d -w0)
 }
 
-TestPuntoPertenece "$EXPECTED1"
-
+TestPuntoPertenece
+TestPuntoNoPertenece
 
