@@ -266,7 +266,8 @@ static void drawJulia(int x, int y, double w, double h, complex_t zc, complex_t 
     double im0 = zc.im + h/2;
 
     fprintf(file, "P2\n");
-    fprintf(file, "%d %d\n", x, y);	
+    fprintf(file, "%d\n", x);	
+    fprintf(file, "%d\n", y);
     fprintf(file, "%d\n", N);
 	 
     for (int j=0; j<y; ++j) {
