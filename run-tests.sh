@@ -12,9 +12,15 @@ function run () {
 }
 
 function TestPuntoPertenece () {
-  echo -e "Test Punto que pertenece al Conjunto de Julia\n"
+  echo "Test Punto que pertenece al Conjunto de Julia\n"
   ./bin/tp0 -c 0.01+0i -r 1x1 -o - > test/actual;
-  diff test/actual test/expected1; 
+  DIFF=$(diff test/actual test/expected1); 
+  if [ "$DIFF" != "" ]
+  then
+    echo "Test failed";
+  else
+    echo "Test passed";
+  fi 
   rm test/actual
 }
 
