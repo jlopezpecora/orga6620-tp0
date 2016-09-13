@@ -80,10 +80,10 @@ options:
 	.space	8
 	.rdata
 	.align	2
-$LC11:
+$LC12:
 	.ascii	"w\000"
 	.align	2
-$LC12:
+$LC13:
 	.ascii	"Error on fopen\000"
 	.align	3
 $LC9:
@@ -93,25 +93,29 @@ $LC9:
 $LC10:
 	.word	1202590843
 	.word	-1081836831
+	.align	3
+$LC11:
+	.word	0
+	.word	1074790400
 	.text
 	.align	2
 	.globl	main
 	.ent	main
 main:
-	.frame	$fp,160,$ra		# vars= 72, regs= 3/0, args= 64, extra= 8
+	.frame	$fp,168,$ra		# vars= 80, regs= 3/0, args= 64, extra= 8
 	.mask	0xd0000000,-8
 	.fmask	0x00000000,0
 	.set	noreorder
 	.cpload	$t9
 	.set	reorder
-	subu	$sp,$sp,160
+	subu	$sp,$sp,168
 	.cprestore 64
-	sw	$ra,152($sp)
-	sw	$fp,148($sp)
-	sw	$gp,144($sp)
+	sw	$ra,160($sp)
+	sw	$fp,156($sp)
+	sw	$gp,152($sp)
 	move	$fp,$sp
-	sw	$a0,160($fp)
-	sw	$a1,164($fp)
+	sw	$a0,168($fp)
+	sw	$a1,172($fp)
 	la	$v0,__sF+88
 	sw	$v0,72($fp)
 	sw	$zero,80($fp)
@@ -126,34 +130,34 @@ main:
 	sw	$v0,112($fp)
 	li	$v0,480			# 0x1e0
 	sw	$v0,116($fp)
-	li	$v0,4			# 0x4
-	sw	$v0,120($fp)
-	li	$v0,4			# 0x4
-	sw	$v0,124($fp)
-	sw	$zero,128($fp)
-	sw	$zero,132($fp)
+	l.d	$f0,$LC11
+	s.d	$f0,120($fp)
+	l.d	$f0,$LC11
+	s.d	$f0,128($fp)
+	sw	$zero,136($fp)
+	sw	$zero,140($fp)
 $L18:
-	addu	$v0,$fp,132
+	addu	$v0,$fp,140
 	sw	$v0,16($sp)
-	lw	$a0,160($fp)
-	lw	$a1,164($fp)
+	lw	$a0,168($fp)
+	lw	$a1,172($fp)
 	lw	$a2,short_options
 	la	$a3,options
 	la	$t9,getopt_long
 	jal	$ra,$t9
-	sw	$v0,128($fp)
-	lw	$v1,128($fp)
+	sw	$v0,136($fp)
+	lw	$v1,136($fp)
 	li	$v0,-1			# 0xffffffffffffffff
 	bne	$v1,$v0,$L20
 	b	$L19
 $L20:
-	lw	$v0,128($fp)
+	lw	$v0,136($fp)
 	addu	$v0,$v0,-63
-	sw	$v0,140($fp)
-	lw	$v1,140($fp)
+	sw	$v0,148($fp)
+	lw	$v1,148($fp)
 	sltu	$v0,$v1,57
 	beq	$v0,$zero,$L38
-	lw	$v0,140($fp)
+	lw	$v0,148($fp)
 	sll	$v1,$v0,2
 	la	$v0,$L39
 	addu	$v0,$v1,$v0
@@ -224,12 +228,12 @@ $L39:
 $L22:
 	la	$t9,print_help
 	jal	$ra,$t9
-	sw	$zero,136($fp)
+	sw	$zero,144($fp)
 	b	$L17
 $L23:
 	la	$t9,print_version
 	jal	$ra,$t9
-	sw	$zero,136($fp)
+	sw	$zero,144($fp)
 	b	$L17
 $L24:
 	addu	$v0,$fp,112
@@ -240,14 +244,14 @@ $L24:
 	la	$t9,set_resolution
 	jal	$ra,$t9
 	beq	$v0,$zero,$L18
-	lw	$a0,128($fp)
+	lw	$a0,136($fp)
 	lw	$a1,optarg
 	la	$t9,print_invalid_arg
 	jal	$ra,$t9
 	la	$t9,print_help
 	jal	$ra,$t9
 	li	$v0,1			# 0x1
-	sw	$v0,136($fp)
+	sw	$v0,144($fp)
 	b	$L17
 $L26:
 	addu	$v0,$fp,80
@@ -256,14 +260,14 @@ $L26:
 	la	$t9,set_complex
 	jal	$ra,$t9
 	beq	$v0,$zero,$L18
-	lw	$a0,128($fp)
+	lw	$a0,136($fp)
 	lw	$a1,optarg
 	la	$t9,print_invalid_arg
 	jal	$ra,$t9
 	la	$t9,print_help
 	jal	$ra,$t9
 	li	$v1,1			# 0x1
-	sw	$v1,136($fp)
+	sw	$v1,144($fp)
 	b	$L17
 $L28:
 	addu	$v0,$fp,96
@@ -272,14 +276,14 @@ $L28:
 	la	$t9,set_complex
 	jal	$ra,$t9
 	beq	$v0,$zero,$L18
-	lw	$a0,128($fp)
+	lw	$a0,136($fp)
 	lw	$a1,optarg
 	la	$t9,print_invalid_arg
 	jal	$ra,$t9
 	la	$t9,print_help
 	jal	$ra,$t9
 	li	$v0,1			# 0x1
-	sw	$v0,136($fp)
+	sw	$v0,144($fp)
 	b	$L17
 $L30:
 	addu	$v0,$fp,120
@@ -288,30 +292,30 @@ $L30:
 	la	$t9,set_size
 	jal	$ra,$t9
 	beq	$v0,$zero,$L18
-	lw	$a0,128($fp)
+	lw	$a0,136($fp)
 	lw	$a1,optarg
 	la	$t9,print_invalid_arg
 	jal	$ra,$t9
 	la	$t9,print_help
 	jal	$ra,$t9
 	li	$v1,1			# 0x1
-	sw	$v1,136($fp)
+	sw	$v1,144($fp)
 	b	$L17
 $L32:
-	addu	$v0,$fp,124
+	addu	$v0,$fp,128
 	lw	$a0,optarg
 	move	$a1,$v0
 	la	$t9,set_size
 	jal	$ra,$t9
 	beq	$v0,$zero,$L18
-	lw	$a0,128($fp)
+	lw	$a0,136($fp)
 	lw	$a1,optarg
 	la	$t9,print_invalid_arg
 	jal	$ra,$t9
 	la	$t9,print_help
 	jal	$ra,$t9
 	li	$v0,1			# 0x1
-	sw	$v0,136($fp)
+	sw	$v0,144($fp)
 	b	$L17
 $L34:
 	lw	$v0,optarg
@@ -327,34 +331,31 @@ $L35:
 	jal	$ra,$t9
 	sw	$zero,0($v0)
 	lw	$a0,optarg
-	la	$a1,$LC11
+	la	$a1,$LC12
 	la	$t9,fopen
 	jal	$ra,$t9
 	sw	$v0,72($fp)
 	lw	$v0,72($fp)
 	bne	$v0,$zero,$L18
-	la	$a0,$LC12
+	la	$a0,$LC13
 	la	$t9,perror
 	jal	$ra,$t9
 	li	$v1,1			# 0x1
-	sw	$v1,136($fp)
+	sw	$v1,144($fp)
 	b	$L17
 $L37:
 	la	$t9,print_help
 	jal	$ra,$t9
 	li	$v0,1			# 0x1
-	sw	$v0,136($fp)
+	sw	$v0,144($fp)
 	b	$L17
 $L38:
 	la	$t9,print_help
 	jal	$ra,$t9
-	sw	$zero,136($fp)
+	sw	$zero,144($fp)
 	b	$L17
 $L19:
-	l.s	$f0,120($fp)
-	cvt.d.w	$f2,$f0
-	l.s	$f0,124($fp)
-	cvt.d.w	$f0,$f0
+	l.d	$f0,128($fp)
 	s.d	$f0,16($sp)
 	lw	$v0,80($fp)
 	sw	$v0,24($sp)
@@ -378,29 +379,29 @@ $L19:
 	sw	$v0,60($sp)
 	lw	$a0,112($fp)
 	lw	$a1,116($fp)
-	mfc1	$a2,$f2
-	mfc1	$a3,$f3
+	lw	$a2,120($fp)
+	lw	$a3,124($fp)
 	la	$t9,drawJulia
 	jal	$ra,$t9
 	lw	$a0,72($fp)
 	la	$t9,fclose
 	jal	$ra,$t9
-	sw	$zero,136($fp)
+	sw	$zero,144($fp)
 $L17:
-	lw	$v0,136($fp)
+	lw	$v0,144($fp)
 	move	$sp,$fp
-	lw	$ra,152($sp)
-	lw	$fp,148($sp)
-	addu	$sp,$sp,160
+	lw	$ra,160($sp)
+	lw	$fp,156($sp)
+	addu	$sp,$sp,168
 	j	$ra
 	.end	main
 	.size	main, .-main
 	.rdata
 	.align	2
-$LC13:
+$LC14:
 	.ascii	"Version: %-1.1f\n\000"
 	.align	3
-$LC14:
+$LC15:
 	.word	0
 	.word	1072693248
 	.text
@@ -419,8 +420,8 @@ print_version:
 	sw	$fp,28($sp)
 	sw	$gp,24($sp)
 	move	$fp,$sp
-	l.d	$f0,$LC14
-	la	$a0,$LC13
+	l.d	$f0,$LC15
+	la	$a0,$LC14
 	mfc1	$a2,$f0
 	mfc1	$a3,$f1
 	la	$t9,printf
@@ -434,7 +435,7 @@ print_version:
 	.size	print_version, .-print_version
 	.rdata
 	.align	2
-$LC15:
+$LC16:
 	.ascii	"Usage:\n"
 	.ascii	"  tp0 -h\n"
 	.ascii	"  tp0 -v\n"
@@ -470,7 +471,7 @@ print_help:
 	sw	$fp,28($sp)
 	sw	$gp,24($sp)
 	move	$fp,$sp
-	la	$a0,$LC15
+	la	$a0,$LC16
 	la	$t9,printf
 	jal	$ra,$t9
 	move	$sp,$fp
@@ -482,7 +483,7 @@ print_help:
 	.size	print_help, .-print_help
 	.rdata
 	.align	2
-$LC16:
+$LC17:
 	.ascii	"Invalid argument <%s> for the option <%c>\n\000"
 	.text
 	.align	2
@@ -502,7 +503,7 @@ print_invalid_arg:
 	move	$fp,$sp
 	sw	$a0,40($fp)
 	sw	$a1,44($fp)
-	la	$a0,$LC16
+	la	$a0,$LC17
 	lw	$a1,44($fp)
 	lw	$a2,40($fp)
 	la	$t9,printf
@@ -668,17 +669,17 @@ $L43:
 	.size	set_resolution, .-set_resolution
 	.rdata
 	.align	2
-$LC17:
+$LC18:
 	.ascii	"A\n\000"
 	.align	2
-$LC18:
+$LC19:
 	.ascii	"out of range\000"
 	.align	2
-$LC19:
+$LC20:
 	.ascii	"Re value not a number: <%s>\n\000"
 	.align	2
-$LC20:
-	.ascii	"i is missing\n\000"
+$LC21:
+	.ascii	"Complex number must follow the a+bi notation.\n\000"
 	.text
 	.align	2
 	.ent	set_complex
@@ -700,7 +701,7 @@ set_complex:
 	lw	$v0,88($fp)
 	lb	$v0,0($v0)
 	bne	$v0,$zero,$L57
-	la	$a0,$LC17
+	la	$a0,$LC18
 	la	$t9,printf
 	jal	$ra,$t9
 	li	$v0,-1			# 0xffffffffffffffff
@@ -784,7 +785,7 @@ $L64:
 	lw	$v1,0($v0)
 	li	$v0,34			# 0x22
 	bne	$v1,$v0,$L67
-	la	$a0,$LC18
+	la	$a0,$LC19
 	la	$t9,perror
 	jal	$ra,$t9
 	li	$v0,-1			# 0xffffffffffffffff
@@ -794,7 +795,7 @@ $L67:
 	lw	$v0,56($fp)
 	lb	$v0,0($v0)
 	beq	$v0,$zero,$L68
-	la	$a0,$LC19
+	la	$a0,$LC20
 	lw	$a1,56($fp)
 	la	$t9,printf
 	jal	$ra,$t9
@@ -825,7 +826,7 @@ $L68:
 	lb	$v1,0($v0)
 	li	$v0,105			# 0x69
 	beq	$v1,$v0,$L69
-	la	$a0,$LC20
+	la	$a0,$LC21
 	la	$t9,printf
 	jal	$ra,$t9
 	li	$v0,-1			# 0xffffffffffffffff
@@ -862,100 +863,85 @@ $L56:
 	j	$ra
 	.end	set_complex
 	.size	set_complex, .-set_complex
+	.rdata
+	.align	2
+$LC22:
+	.ascii	"set_size val argument not a number: <%s>\n\000"
+	.text
 	.align	2
 	.ent	set_size
 set_size:
-	.frame	$fp,32,$ra		# vars= 16, regs= 2/0, args= 0, extra= 8
-	.mask	0x50000000,-4
+	.frame	$fp,48,$ra		# vars= 8, regs= 3/0, args= 16, extra= 8
+	.mask	0xd0000000,-8
 	.fmask	0x00000000,0
 	.set	noreorder
 	.cpload	$t9
 	.set	reorder
-	subu	$sp,$sp,32
-	.cprestore 0
-	sw	$fp,28($sp)
-	sw	$gp,24($sp)
+	subu	$sp,$sp,48
+	.cprestore 16
+	sw	$ra,40($sp)
+	sw	$fp,36($sp)
+	sw	$gp,32($sp)
 	move	$fp,$sp
-	sw	$a0,32($fp)
-	sw	$a1,36($fp)
-	sw	$zero,12($fp)
-	sw	$zero,8($fp)
+	sw	$a0,48($fp)
+	sw	$a1,52($fp)
+	la	$t9,__errno
+	jal	$ra,$t9
+	sw	$zero,0($v0)
+	lw	$a0,48($fp)
+	addu	$a1,$fp,24
+	la	$t9,strtod
+	jal	$ra,$t9
+	lw	$v0,52($fp)
+	s.d	$f0,0($v0)
+	la	$t9,__errno
+	jal	$ra,$t9
+	lw	$v1,0($v0)
+	li	$v0,34			# 0x22
+	bne	$v1,$v0,$L72
+	la	$a0,$LC19
+	la	$t9,perror
+	jal	$ra,$t9
+	li	$v0,-1			# 0xffffffffffffffff
+	sw	$v0,28($fp)
+	b	$L71
 $L72:
-	lw	$v1,32($fp)
-	lw	$v0,8($fp)
-	addu	$v0,$v1,$v0
+	lw	$v0,24($fp)
 	lb	$v0,0($v0)
-	bne	$v0,$zero,$L75
-	b	$L73
-$L75:
-	lw	$v1,32($fp)
-	lw	$v0,8($fp)
-	addu	$v0,$v1,$v0
-	lb	$v1,0($v0)
-	lw	$v0,_ctype_
-	addu	$v0,$v1,$v0
-	addu	$v0,$v0,1
-	lbu	$v0,0($v0)
-	srl	$v0,$v0,2
-	andi	$v0,$v0,0x1
-	bne	$v0,$zero,$L76
+	beq	$v0,$zero,$L73
+	la	$a0,$LC22
+	lw	$a1,24($fp)
+	la	$t9,printf
+	jal	$ra,$t9
 	li	$v0,-1			# 0xffffffffffffffff
-	sw	$v0,16($fp)
+	sw	$v0,28($fp)
 	b	$L71
-$L76:
-	lw	$v1,12($fp)
-	move	$v0,$v1
-	sll	$v0,$v0,2
-	addu	$v0,$v0,$v1
-	sll	$a0,$v0,1
-	lw	$v1,32($fp)
-	lw	$v0,8($fp)
-	addu	$v0,$v1,$v0
-	lb	$v0,0($v0)
-	addu	$v0,$a0,$v0
-	addu	$v0,$v0,-48
-	sw	$v0,12($fp)
-	lw	$v0,8($fp)
-	addu	$v0,$v0,1
-	sw	$v0,8($fp)
-	b	$L72
 $L73:
-	lw	$v0,12($fp)
-	bne	$v0,$zero,$L77
-	li	$v0,-1			# 0xffffffffffffffff
-	sw	$v0,16($fp)
-	b	$L71
-$L77:
-	lw	$v1,36($fp)
-	lw	$v0,12($fp)
-	sw	$v0,0($v1)
-	sw	$zero,16($fp)
+	sw	$zero,28($fp)
 $L71:
-	lw	$v0,16($fp)
+	lw	$v0,28($fp)
 	move	$sp,$fp
-	lw	$fp,28($sp)
-	addu	$sp,$sp,32
+	lw	$ra,40($sp)
+	lw	$fp,36($sp)
+	addu	$sp,$sp,48
 	j	$ra
 	.end	set_size
 	.size	set_size, .-set_size
 	.rdata
 	.align	2
-$LC22:
+$LC24:
 	.ascii	"P2\n\000"
 	.align	2
-$LC23:
-	.ascii	"%d %d\n\000"
-	.align	2
-$LC24:
+$LC25:
 	.ascii	"%d\n\000"
 	.align	2
-$LC25:
+$LC26:
 	.ascii	"%d \000"
 	.align	2
-$LC26:
+$LC27:
 	.ascii	"\n\000"
 	.align	3
-$LC21:
+$LC23:
 	.word	0
 	.word	1073741824
 	.text
@@ -989,48 +975,52 @@ drawJulia:
 	div.d	$f0,$f0,$f2
 	s.d	$f0,64($fp)
 	l.d	$f2,144($fp)
-	l.d	$f0,$LC21
+	l.d	$f0,$LC23
 	div.d	$f2,$f2,$f0
 	l.d	$f0,160($fp)
 	sub.d	$f0,$f0,$f2
 	s.d	$f0,72($fp)
 	l.d	$f2,152($fp)
-	l.d	$f0,$LC21
+	l.d	$f0,$LC23
 	div.d	$f2,$f2,$f0
 	l.d	$f0,168($fp)
 	add.d	$f0,$f0,$f2
 	s.d	$f0,80($fp)
 	lw	$a0,196($fp)
-	la	$a1,$LC22
-	la	$t9,fprintf
-	jal	$ra,$t9
-	lw	$a0,196($fp)
-	la	$a1,$LC23
-	lw	$a2,136($fp)
-	lw	$a3,140($fp)
-	la	$t9,fprintf
-	jal	$ra,$t9
-	lw	$a0,196($fp)
 	la	$a1,$LC24
+	la	$t9,fprintf
+	jal	$ra,$t9
+	lw	$a0,196($fp)
+	la	$a1,$LC25
+	lw	$a2,136($fp)
+	la	$t9,fprintf
+	jal	$ra,$t9
+	lw	$a0,196($fp)
+	la	$a1,$LC25
+	lw	$a2,140($fp)
+	la	$t9,fprintf
+	jal	$ra,$t9
+	lw	$a0,196($fp)
+	la	$a1,$LC25
 	lw	$a2,192($fp)
 	la	$t9,fprintf
 	jal	$ra,$t9
 	sw	$zero,88($fp)
-$L79:
+$L75:
 	lw	$v0,88($fp)
 	lw	$v1,140($fp)
 	slt	$v0,$v0,$v1
-	bne	$v0,$zero,$L82
-	b	$L78
-$L82:
+	bne	$v0,$zero,$L78
+	b	$L74
+$L78:
 	sw	$zero,92($fp)
-$L83:
+$L79:
 	lw	$v0,92($fp)
 	lw	$v1,136($fp)
 	slt	$v0,$v0,$v1
-	bne	$v0,$zero,$L86
-	b	$L84
-$L86:
+	bne	$v0,$zero,$L82
+	b	$L80
+$L82:
 	addu	$v0,$fp,96
 	l.d	$f0,56($fp)
 	s.d	$f0,16($sp)
@@ -1048,28 +1038,28 @@ $L86:
 	lw	$v0,192($fp)
 	sw	$v0,112($fp)
 	sw	$zero,116($fp)
-$L87:
+$L83:
 	lw	$v0,192($fp)
 	addu	$v1,$v0,-1
 	lw	$v0,116($fp)
 	slt	$v0,$v0,$v1
-	bne	$v0,$zero,$L90
-	b	$L88
-$L90:
+	bne	$v0,$zero,$L86
+	b	$L84
+$L86:
 	addu	$v0,$fp,96
 	move	$a0,$v0
 	la	$t9,complex_abs
 	jal	$ra,$t9
 	mov.d	$f2,$f0
-	l.d	$f0,$LC21
+	l.d	$f0,$LC23
 	c.lt.d	$f0,$f2
-	bc1t	$L92
-	b	$L91
-$L92:
+	bc1t	$L88
+	b	$L87
+$L88:
 	lw	$v0,116($fp)
 	sw	$v0,112($fp)
-	b	$L88
-$L91:
+	b	$L84
+$L87:
 	addu	$v1,$fp,96
 	lw	$v0,104($fp)
 	sw	$v0,16($sp)
@@ -1093,27 +1083,27 @@ $L91:
 	lw	$v0,116($fp)
 	addu	$v0,$v0,1
 	sw	$v0,116($fp)
-	b	$L87
-$L88:
+	b	$L83
+$L84:
 	lw	$a0,196($fp)
-	la	$a1,$LC25
+	la	$a1,$LC26
 	lw	$a2,112($fp)
 	la	$t9,fprintf
 	jal	$ra,$t9
 	lw	$v0,92($fp)
 	addu	$v0,$v0,1
 	sw	$v0,92($fp)
-	b	$L83
-$L84:
+	b	$L79
+$L80:
 	lw	$a0,196($fp)
-	la	$a1,$LC26
+	la	$a1,$LC27
 	la	$t9,fprintf
 	jal	$ra,$t9
 	lw	$v0,88($fp)
 	addu	$v0,$v0,1
 	sw	$v0,88($fp)
-	b	$L79
-$L78:
+	b	$L75
+$L74:
 	move	$sp,$fp
 	lw	$ra,128($sp)
 	lw	$fp,124($sp)
