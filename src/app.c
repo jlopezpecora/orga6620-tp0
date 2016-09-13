@@ -28,7 +28,7 @@ static void print_help();
 static void print_version();
 static void print_invalid_arg(int opt, char* arg);
 static int set_resolution(char* res, int* rx, int* ry);
-static int set_size(char* val, int* n);
+static int set_size(char* val, double* dim);
 static int set_complex(char* val, complex_t* z);
 static void drawJulia(int x, int y, double w, double h, complex_t zc, complex_t c,int N, FILE* file);
 
@@ -60,8 +60,8 @@ int main(int argc, char** argv) {
     int rx = RESOLUTION_X;
     int ry = RESOLUTION_Y;
     
-    int w = WIDTH;
-    int h = HEIGHT;
+    double w = WIDTH;
+    double h = HEIGHT;
 
 	int param = 0;
 	int index = 0;
@@ -243,19 +243,19 @@ static int set_complex(char* val, complex_t* z) {
     return 0;
 }
 
-static int set_size(char* val, int* n) {
-    int i;
-    int x = 0;
-    for (i = 0; val[i] != '\0'; ++i) {
-        if (!isdigit(val[i])) {
-            return -1;
-        }
-        x = x *10 + (val[i] - '0');
-    }
-    if (x == 0) {
+static int set_size(char* val, double* dim) {
+    char *endptr;
+    errno = 0;    // To distinguish success/failure after call
+    *dim = strtod(val, &endptr);
+    if (errno == ERANGE) {  //check overflow or underflow
+        perror("out of range");
         return -1;
     }
-    *n = x;
+    if (*endptr != '\0') {  //test for invalid characters
+        printf("set_size val argument not a number: <%s>\n", endptr);
+        return -1;
+    }
+
     return 0;
 }
 
