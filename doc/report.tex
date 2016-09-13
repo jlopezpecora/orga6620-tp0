@@ -89,8 +89,57 @@ El código fuente del programa se puede encontrar en el anexo \ref{sec:source}.
 
 \section{Corridas de Programa}
 
-Corrida de Programas
+\subsection{Ejemplos}
 
+Primero realizamos la prueba de generar las dos imagenes que se daban de ejemplo en el enunciado. Para el primer caso generamos la imagen con los valores dados por defecto. Esta se puede ver en la carpeta test con el nombre uno.pgm.
+Para la segunda imagen hacemos zoom sobre la región centrada en +0,282 − 0,01i, usando un rectángulo de 0,005 unidades de lado. Esta figura se puede ver en la carpeta test con el nombre dos.pgm.
+
+\subsection{Pruebas}
+
+Luego de verificar que el programa genera las imagenes correspondiente a los ejemplos, procedimos a ejecutar los casos de prueba. Para ello nos posicionamos en la carpeta raíz que contiene al archivo run-test.sh y luego realizamos la ejecución de este archivo  haciendo sh run-test.sh, retornando como output los resultados correspondientes a cada prueba.
+A continuación detallamos los resultados de las pruebas realizadas.
+
+
+\begin{enumerate}
+   
+    \item \textbf{Generación de una imagen de 1 punto de lado, centrada en el orı́gen del plano 	complejo.}\n
+
+	Aquí se observa que el resultado del test es passed. Esto significa que paso la prueba satisfactoriamente.
+	
+	Para esto se uso el valor esperado expected1.pgm que se encuentra en la carpeta test.
+    
+    \item \textbf{Un punto que no pertenece al conjunto.}
+
+	Aquí se observa que el resultado del test es passed. Esto significa que paso la prueba satisfactoriamente.    
+	
+	Para esto se uso el valor esperado expected2.pgm que se encuentra en la carpeta test.
+	
+    
+    \item \textbf{Imagen imposible.}
+
+	Aquí se observa que el resultado del test es passed. Esto significa que paso la prueba satisfactoriamente. 
+	
+	Para esto se uso el valor esperado expected3 que se encuentra en la carpeta test.   
+
+	\item \textbf{Archivo de salida imposible.}    
+	
+	Aquí se observa que el resultado del test es passed. Esto significa que paso la prueba satisfactoriamente. 
+	
+	Para esto se uso el valor esperado expected4 que se encuentra en la carpeta test.
+	
+	\item \textbf{Coordenadas complejas imposibles.}   
+	
+	Aquí se observa que el resultado del test es passed. Esto significa que paso la prueba satisfactoriamente. 
+	
+	Para esto se uso el valor esperado expected5 que se encuentra en la carpeta test.
+	
+	\item \textbf{Argumentos de líneas de compando vacíos.}    
+	
+	Aquí se observa que el resultado del test es passed. Esto significa que paso la prueba satisfactoriamente. 
+	
+	Para esto se uso el valor esperado expected6 que se encuentra en la carpeta test.
+    
+\end{enumerate}
 
 
 \clearpage
