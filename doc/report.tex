@@ -54,7 +54,11 @@ El objetivo del presente trabajo práctico es familiarizarse con las herramienta
 Finalmente compilaremos el programa en el emulador GXemul para poder obtener el código de instrucciones Mips32.
 
 \section{Build}
-El correspondiente informe se puede construir utilizando el make con la etiqueta doc la cual borra y genera el informe en formato pdf.
+El correspondiente informe se puede construir utilizando el make. Luego se pueden ejecutar los tests corriendo el script run-tests.sh.
+\begin{lstlisting}[language=bash]
+$ make
+$ ./run-tests.sh
+\end{lstlisting}
 
 \section{Diseño e Implementación del Programa}
 Para el desarrollo del programa se utilizó como base el pseudocódigo proporcionado en el enunciado del trabajo práctico. \ref{sec:enunciado}
@@ -89,16 +93,74 @@ El código fuente del programa se puede encontrar en el anexo \ref{sec:source}.
 
 \section{Corridas de Programa}
 
-Corrida de Programas
 
-Para ver el mensaje de ayuda, usamos la opcion -h como muestra la Figura~\ref{fig:help}.
+\subsection{Ejemplos}
 
-\begin{figure}[H]
-	\centering
-		\includegraphics[scale=0.4]{case1.eps}
-	\caption{Menú de Ayuda}
-	\label{fig:help}
-\end{figure}
+Primero realizamos la prueba de generar la imagen que se muestra de ejemplo en el enunciado. Para ello generamos la imagen con los valores dados por defecto. 
+La imagen resultante se puede ver en la carpeta test con el nombre uno.pgm.
+\begin{lstlisting}[language=bash]
+$ ./tp0 -o uno.pgm
+\end{lstlisting}
+Para el siguiente caso utilizaremos el parámetro C con el valor +0,285 - 0i, manteniendo el resto de los valores por defecto. Esta figura se puede ver en la carpeta test con el nombre dos.pgm.
+\begin{lstlisting}[language=bash]
+$ ./tp0 -C 0.285+0i -o dos.pgm
+\end{lstlisting}
+En el tercer caso, generaremos la imagen utilizando C con el valor -0.8 + 0.156i. El resultado se puede ver en la imagen tres.pgm.
+\begin{lstlisting}[language=bash]
+$ ./tp0 -C -0.8+0.156i -o tres.pgm
+\end{lstlisting}
+El cuarto caso, utilizaremos C con el valor 0.8i. El resultado se muestra en la imagen cuatro.pgm.
+\begin{lstlisting}[language=bash]
+$ ./tp0 -C 0+0.8i -o cuatro.pgm
+\end{lstlisting}
+Por último, mostramos el tercer caso pero haciendo un zoom en el centro.
+\begin{lstlisting}[language=bash]
+$ ./tp0 -C -0.8+0.156i -w 0.5 -H 0.5 -o cinco.pgm
+\end{lstlisting}
+\subsection{Pruebas}
+
+Luego de verificar que el programa genera las imagenes correspondiente a los ejemplos, procedimos a ejecutar los casos de prueba. Para ello nos posicionamos en la carpeta raíz que contiene al archivo run-test.sh y luego realizamos la ejecución de este archivo  haciendo sh run-test.sh, retornando como output los resultados correspondientes a cada prueba.
+A continuación detallamos los resultados de las pruebas realizadas.
+
+
+\begin{enumerate}
+   
+    \item \textbf{Generación de una imagen de 1 punto de lado, centrada en el origen del plano 	complejo.}
+
+	Este test prueba el caso de un sólo punto cuyo brillo vale 19.
+	
+	Para esto se uso el valor esperado expected1.pgm que se encuentra en la carpeta test.
+    
+    \item \textbf{Un punto que no pertenece al conjunto.}
+
+	En este caso, se intenta probar que el punto ingresado no pertenece al conjunto de Julia, por lo tanto el valor de su brillo debe ser 0.	
+	Para esto se uso el valor esperado expected2.pgm que se encuentra en la carpeta test.
+	
+    
+    \item \textbf{Imagen imposible.}
+
+	En este caso de prueba, se intenta ingresar una imagen de ancho 0, con lo cual se espera que el programa retorne un mensaje de error.	
+	Para esto se uso el valor esperado expected3 que se encuentra en la carpeta test.   
+
+	\item \textbf{Archivo de salida imposible.}    
+	
+	Se prueba el caso de ingresar un directorio en vez de un archivo como output.
+	
+	Para esto se uso el valor esperado expected4 que se encuentra en la carpeta test.
+	
+	\item \textbf{Coordenadas complejas imposibles.}   
+	
+	Se ingresan valores que no corresponden a un número complejo y se busca comparar el mensaje de error retornado.	
+	Para esto se uso el valor esperado expected5 que se encuentra en la carpeta test.
+	
+	\item \textbf{Argumentos de líneas de compando vacíos.}    
+	
+	En el último caso, se ingresa un argumento sin valor y el programa deberá emitir un mensaje de error mostrando el uso correcto de los argumentos.
+	Para esto se uso el valor esperado expected6 que se encuentra en la carpeta test.
+    
+\end{enumerate}
+
+
 
 \clearpage
 
