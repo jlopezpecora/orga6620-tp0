@@ -229,7 +229,7 @@ static int set_complex(char* val, complex_t* z) {
         
     //test for character 'i' presence
     if (strlen(im_str) > 0 && im_str[strlen(im_str) - 1] != 'i') {
-        printf("i is missing\n");
+        printf("Complex number must follow the a+bi notation.\n");
         return -1;
     }
     im = strtod(im_str, &endptr);
