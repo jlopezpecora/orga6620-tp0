@@ -1,0 +1,18 @@
+Complex number must follow the a+bi notation.
+Invalid argument <1+3> for the option <c>
+Usage:
+  tp0 -h
+  tp0 -v
+  tp0 -r <axb> -c <> -C <> -w <width> -H <height> -o <filepath>
+  tp0 < in_file > out_file
+Options:
+  -r               Set resolution. [640x480] by default.
+  -c               Set image center. [0+0i] by default.
+  -C               Set c value. [0.285-0.01i] by default.
+  -w               Set width. [4] by default.
+  -H               Set height. [4] by default.
+  -o               Set output file. [std] by default.
+  -h, --help       Print this information and quit.
+Examples:
+  tp0 -r 1024x800 -w 24 -H 16 -o out.pgm
+  cat in.txt | tp0 > out.txt
